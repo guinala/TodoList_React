@@ -100,7 +100,7 @@ function TodoList() {
             {filteredTasks.map((task) => {
               const index = tasks.indexOf(task);
               return (
-                <Task key={index} onClick={() => toggleTask(index)} isCompleted={task.state === 'completed'}>
+                <Task key={index} onClickDelete={deleteTask} onClick={() => toggleTask(index)} isCompleted={task.state === 'completed'}>
                   {task.content}
                 </Task>
               );
