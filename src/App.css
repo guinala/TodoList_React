@@ -1,0 +1,142 @@
+:root {
+  --color-main-bg: #615ffd;
+  --color--btn-bg: #fff;
+  --color-border: #e5e7eb;
+  --color-text: #111827;
+  --color-check-border: #cbd5e1;
+  --color-check-checked: #16a34a;
+  --color-task-done-bg: #ecfdf5;
+  --color-task-done-text: #065f46;
+
+  --max-width: 1280px;
+  --spacing-base: 1rem;
+  --spacing-small: 10px;
+  --spacing-medium: 12px;
+  --radius: 10px;
+  --font-size-base: 16px;
+  --font-size-small: 14px;
+}
+
+#root {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.todo__container 
+{
+
+}
+
+.todo__title 
+{
+
+}
+
+.todo__input-area 
+{
+
+}
+
+.todo__input 
+{
+
+}
+
+.todo__add-button 
+{
+
+}
+
+.todo__filters 
+{
+  margin: 1rem 0;
+}
+
+.todo__task-list 
+{
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-base) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+}
+
+.todo__task-button 
+{
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium);
+  width: 100%;
+  background: var(--color--btn-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  text-align: left;
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.todo__task-button--done 
+{
+  background: var(--color-task-done-bg);
+  color: var(--color-task-done-text);
+}
+
+.todo__check 
+{
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-check-border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--color--btn-bg);
+  transition: all .15s ease;
+  background: var(--color--btn-bg);
+}
+
+.todo__check--checked 
+{
+  background: var(--color-check-checked);
+  border-color: var(--color-check-checked);
+}
+
+.todo__task-button--done .todo__task-content 
+{
+  text-decoration: line-through;
+  opacity: 0.9;
+}
+
+.todo__task-content 
+{
+  flex: 1;
+  text-align: left;
+}
+
+button 
+{
+  margin: 0;
+}
+
+.todo__search 
+{
+  margin: 12px 0;
+}
+
+.todo__search-input 
+{
+  width: 100%;
+  max-width: 480px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: var(--font-size-small);
+}
