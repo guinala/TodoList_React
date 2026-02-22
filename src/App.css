@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-:root {
+:root 
+{
   --color-main-bg: #615ffd;
   --color--btn-bg: #fff;
   --color-border: #e5e7eb;
@@ -19,36 +20,12 @@
   --font-size-small: 14px;
 }
 
-#root {
+#root 
+{
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
-
-.todo__container 
-{
-
-}
-
-.todo__title 
-{
-
-}
-
-.todo__input-area 
-{
-
-}
-
-.todo__input 
-{
-
-}
-
-.todo__add-button 
-{
-
 }
 
 .todo__filters 
@@ -126,11 +103,6 @@
 button 
 {
   margin: 0;
-}
-
-.todo__search, .todo__input-area
-{
-  margin: 12px 0;
 }
 
 .todo__search-input, .todo__input
