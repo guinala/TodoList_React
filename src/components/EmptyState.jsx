@@ -1,7 +1,6 @@
-import '../App.css';
+import "../App.css";
 
-function EmptyState() 
-{
+function EmptyState() {
   return (
     <div>
       <p className="text-red-600">No se han encontrado tareas</p>
@@ -9,4 +8,4 @@ function EmptyState()
   );
 }
 
-export default EmptyState
+export default EmptyState;
