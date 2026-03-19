@@ -1,7 +1,19 @@
 import "../App.css";
-import React, { useState, useEffect } from "react";
 import EmptyState from "./EmptyState";
 import Task from "./Task";
+
+type TaskListProps = {
+  tasks: { content: string; state: string }[];
+  filteredTasks: { content: string; state: string }[];
+  editingIndex: number | null;
+  editingContent: string;
+  onEditContentChange: (content: string) => void;
+  onToggle: (index: number) => void;
+  onEdit: (index: number) => void;
+  onDelete: (index: number) => void;
+  onSaveEdit: (index: number) => void;
+  onCancelEdit: () => void;
+};
 
 function TaskList({
   tasks,
@@ -14,7 +26,7 @@ function TaskList({
   onDelete,
   onSaveEdit,
   onCancelEdit,
-}) {
+}: TaskListProps) {
   if (filteredTasks.length === 0) {
     return <EmptyState />;
   }
@@ -26,7 +38,6 @@ function TaskList({
         return (
           <Task
             key={index}
-            index={index}
             isCompleted={task.state === "completed"}
             isEditing={editingIndex === index}
             editingContent={editingContent}

@@ -63,13 +63,19 @@ function TodoList() {
     completed: tasks.filter((t: TaskItem) => t.state === "completed").length,
   };
 
-  const filteredTasks = tasks
-    .filter((task: TaskItem) =>
-      filter === "all" ? true : task.state === filter,
-    )
-    .filter((task: TaskItem) =>
+  // const filteredTasks = tasks
+  //   .filter((task: TaskItem) =>
+  //     filter === "all" ? true : task.state === filter,
+  //   )
+  //   .filter((task: TaskItem) =>
+  //     task.content.toLowerCase().includes(search.trim().toLowerCase()),
+  //   );
+
+  const filteredTasks = tasks.filter(
+    (task: TaskItem) =>
+      (filter === "all" || task.state === filter) &&
       task.content.toLowerCase().includes(search.trim().toLowerCase()),
-    );
+  );
 
   function toggleTask(index: number) {
     setTasks(

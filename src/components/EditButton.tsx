@@ -1,6 +1,10 @@
 import "../App.css";
 
-function EditButton({ onClickEvent }) {
+type EditButtonProps = {
+  onClickEvent: () => void
+};
+
+function EditButton({ onClickEvent }: EditButtonProps) {
   return (
     <button
       onClick={onClickEvent}

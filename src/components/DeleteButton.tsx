@@ -1,6 +1,10 @@
 import "../App.css";
 
-function DeleteButton({ onClickEvent }) {
+type DeleteButtonProps = {
+  onClickEvent: () => void
+};
+
+function DeleteButton({ onClickEvent }: DeleteButtonProps) {
   return (
     <button
       onClick={onClickEvent}
