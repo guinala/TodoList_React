@@ -2,6 +2,19 @@ import "../App.css";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
 
+type TaskProps = {
+  children: string,
+  isCompleted: boolean,
+  isEditing: boolean,
+  editingContent: string,
+  onEditContentChange: (e: string) => void,
+  onClick: () => void,
+  onClickEdit: () => void,
+  onClickDelete: () => void,
+  onSaveEdit: () => void,
+  onCancelEdit: () => void,
+};
+
 function Task({
   children,
   isCompleted,
@@ -13,7 +26,7 @@ function Task({
   onClickDelete,
   onSaveEdit,
   onCancelEdit,
-}) {
+}: TaskProps) {
   if (isEditing) {
     return (
       <li className="flex items-center gap-2 bg-slate-800 border border-indigo-500 rounded-xl px-4 py-3 shadow">

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { sileo, Toaster } from "sileo";
-import { ToastContainer, toast, Bounce } from "react-toastify";
 import EmptyState from "./components/EmptyState";
 import Task from "./components/Task";
 
+interface TaskItem {
+  content: string;
+  state: "pending" | "completed";
+}
+
 function TodoList() {
-  const [tasks, setTasks] = useState(() => {
+  const [tasks, setTasks] = useState<TaskItem[]>(() => {
     const saved = localStorage.getItem("tasks");
     return saved ? JSON.parse(saved) : [];
   });
@@ -14,7 +18,7 @@ function TodoList() {
   const [taskDisplay, setNewTask] = useState("");
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
-  const [editingIndex, setEditingIndex] = useState();
+  const [editingIndex, setEditingIndex] = useState<number | undefined>();
   const [editingContent, setEditingContent] = useState("");
 
   useEffect(() => {
@@ -23,10 +27,10 @@ function TodoList() {
 
   function addTask() {
     const trimmed = taskDisplay.trim();
-    
+
     if (!trimmed) return;
-    
-    const newTask = { content: trimmed, state: "pending" };
+
+    const newTask: TaskItem = { content: trimmed, state: "pending" };
     setTasks([...tasks, newTask]);
     setNewTask("");
 
@@ -34,26 +38,14 @@ function TodoList() {
       title: "New Task Added!",
       fill: "black",
     });
-
-    toast.success("🦄 Task Added!", {
-      position: "top-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
   }
 
-  function handleInput(event) {
+  function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
     const content = event.target.value;
     setNewTask(content);
   }
 
-  function handleKey(event) {
+  function handleKey(event: React.KeyboardEvent<HTMLInputElement>) {
     const key = event.key;
 
     if (key === "Enter") {
@@ -61,25 +53,27 @@ function TodoList() {
     }
   }
 
-  function handleSearchChange(event) {
+  function handleSearchChange(event: React.ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value);
   }
 
   const counts = {
     all: tasks.length,
-    pending: tasks.filter((t) => t.state === "pending").length,
-    completed: tasks.filter((t) => t.state === "completed").length,
+    pending: tasks.filter((t: TaskItem) => t.state === "pending").length,
+    completed: tasks.filter((t: TaskItem) => t.state === "completed").length,
   };
 
   const filteredTasks = tasks
-    .filter((task) => (filter === "all" ? true : task.state === filter))
-    .filter((task) =>
+    .filter((task: TaskItem) =>
+      filter === "all" ? true : task.state === filter,
+    )
+    .filter((task: TaskItem) =>
       task.content.toLowerCase().includes(search.trim().toLowerCase()),
     );
 
-  function toggleTask(index) {
+  function toggleTask(index: number) {
     setTasks(
-      tasks.map((t, i) =>
+      tasks.map((t: TaskItem, i: number) =>
         i === index
           ? { ...t, state: t.state === "pending" ? "completed" : "pending" }
           : t,
@@ -87,27 +81,32 @@ function TodoList() {
     );
   }
 
-  function deleteTask(index) {
-    setTasks(tasks.filter((_, i) => i !== index));
+  function deleteTask(index: number) {
+    setTasks(tasks.filter((_: TaskItem, i: number) => i !== index));
   }
 
-  function startEdit(index) {
+  function startEdit(index: number) {
     setEditingIndex(index);
     setEditingContent(tasks[index].content);
   }
 
-  function saveEdit(index) {
+  function saveEdit(index: number) {
     const trimmed = editingContent.trim();
+
     if (!trimmed) return;
+
     setTasks(
-      tasks.map((t, i) => (i === index ? { ...t, content: trimmed } : t)),
+      tasks.map((t: TaskItem, i: number) =>
+        i === index ? { ...t, content: trimmed } : t,
+      ),
     );
-    setEditingIndex(null);
+
+    setEditingIndex(undefined);
     setEditingContent("");
   }
 
   function cancelEdit() {
-    setEditingIndex(null);
+    setEditingIndex(undefined);
     setEditingContent("");
   }
 
@@ -119,19 +118,6 @@ function TodoList() {
 
   return (
     <>
-      <ToastContainer
-        position="top-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-        transition={Bounce}
-      />
       <Toaster position="top-right" />
       <div className="flex flex-col items-center">
         <h1 className="text-3xl font-bold text-white mb-6 text-center">
@@ -189,7 +175,6 @@ function TodoList() {
                 return (
                   <Task
                     key={index}
-                    index={index}
                     isCompleted={task.state === "completed"}
                     isEditing={editingIndex === index}
                     editingContent={editingContent}
